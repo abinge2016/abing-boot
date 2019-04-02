@@ -24,6 +24,17 @@ public class BizException extends RuntimeException{
         super(cause);
     }
 
+    public static BizException build(String message){
+        return new BizException(message);
+    }
+
+    public static BizException build(String message, Throwable cause){
+        return new BizException(message,cause);
+    }
+    public static BizException build(Throwable cause){
+        return new BizException(cause);
+    }
+
     @Override
     public synchronized Throwable fillInStackTrace() {
         return this;
