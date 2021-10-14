@@ -1,7 +1,7 @@
-package com.abinge.boot.staging.dao;
+package com.abinge.boot.staging.repository;
 
 import com.abinge.boot.staging.model.Student;
-import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.repository.reactive.ReactiveCrudRepository;
 
 /**
  * @author abinge
@@ -12,5 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * @description 学生类
  * @date 2019/1/5 16:00
  */
-public interface StudentRepository extends JpaRepository<Student, Long> {
+public interface StudentRepository extends ReactiveCrudRepository<Student, Long> {
 }

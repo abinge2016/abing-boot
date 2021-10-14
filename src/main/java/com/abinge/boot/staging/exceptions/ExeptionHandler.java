@@ -1,9 +1,18 @@
 package com.abinge.boot.staging.exceptions;
 
 import com.abinge.boot.staging.model.Result;
+import com.alibaba.fastjson.JSON;
 import lombok.extern.slf4j.Slf4j;
-import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.RestControllerAdvice;
+import org.springframework.core.annotation.Order;
+import org.springframework.core.io.buffer.DataBuffer;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
+import org.springframework.http.server.reactive.ServerHttpResponse;
+import org.springframework.stereotype.Component;
+import org.springframework.web.server.ServerWebExchange;
+import org.springframework.web.server.WebExceptionHandler;
+import reactor.core.publisher.Mono;
+
 
 /**
  * @author abinge
@@ -14,20 +23,20 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
  * @description TODO
  * @date 2019/1/5 18:04
  */
-@RestControllerAdvice
 @Slf4j
-public class ExeptionHandler {
+@Component
+@Order(-2)
+public class ExeptionHandler implements WebExceptionHandler {
 
-    @ExceptionHandler(BizException.class)
-    public Result handBizException(BizException e) {
-        log.error("process system error", e);
-        return Result.fail(e.getMessage());
+    @Override
+    public Mono<Void> handle(ServerWebExchange serverWebExchange, Throwable throwable) {
+        log.error("process system error", throwable);
+        ServerHttpResponse response = serverWebExchange.getResponse();
+        response.setStatusCode(HttpStatus.OK);
+        response.getHeaders().setContentType(MediaType.APPLICATION_JSON);
+        DataBuffer wrap = response.bufferFactory().wrap(JSON.toJSONString(Result.fail(throwable.getMessage())).getBytes());
+        return response.writeWith(Mono.just(wrap));
     }
-
-    @ExceptionHandler(Exception.class)
-    public Result handException(Exception e) {
-        log.error("process system error", e);
-        return Result.fail();
-    }
-
 }
+
+

@@ -2,6 +2,8 @@ package com.abinge.boot.staging.model;
 
 import org.apache.commons.lang3.StringUtils;
 
+import java.io.Serializable;
+
 /**
  * @author abinge
  * @version 1.0.0
@@ -11,7 +13,7 @@ import org.apache.commons.lang3.StringUtils;
  * @description TODO
  * @date 2019/1/5 17:37
  */
-public class Result<T> {
+public class Result<T> implements Serializable {
 
     private final static String SUCCESS_CODE = "0";
     private final static String SUCCESS_MSG = "成功";

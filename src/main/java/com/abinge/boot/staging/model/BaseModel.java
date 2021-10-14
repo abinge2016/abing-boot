@@ -2,10 +2,9 @@ package com.abinge.boot.staging.model;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import org.springframework.data.annotation.CreatedDate;
+import org.springframework.data.annotation.Id;
 import org.springframework.data.annotation.LastModifiedDate;
-import org.springframework.data.jpa.domain.support.AuditingEntityListener;
 
-import javax.persistence.*;
 import java.io.Serializable;
 import java.util.Date;
 
@@ -22,14 +21,11 @@ import java.util.Date;
  * @EntityListeners(AuditingEntityListener.class) 添加此注解，下面的@CreatedDate和@LastModifiedDate才会生效
  *
  */
-@MappedSuperclass
-@EntityListeners(AuditingEntityListener.class)
 public class BaseModel implements Serializable {
     /**
      * 主键id，且设置为自增
      */
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
     protected Long id;
 
     @CreatedDate

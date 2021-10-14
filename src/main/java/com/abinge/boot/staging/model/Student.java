@@ -2,8 +2,6 @@ package com.abinge.boot.staging.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
-
 /**
  * @author abinge
  * @version 1.0.0
@@ -13,7 +11,7 @@ import javax.persistence.Entity;
  * @description TODO
  * @date 2019/1/5 15:56
  */
-@Entity
+
 @Data
 public class Student extends BaseModel {
     private String name;
