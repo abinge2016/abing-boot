@@ -30,6 +30,9 @@ public class StudentService {
     public Student update(Student student) {
         return studentRepository.saveAndFlush(student);
     }
+    public Student update(Student student, String studentName) {
+        return studentRepository.saveAndFlush(student);
+    }
 
     public Student delete(Student student) {
         studentRepository.delete(student);

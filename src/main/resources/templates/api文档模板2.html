@@ -1,0 +1,503 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="utf-8"/>
+		<title></title>
+		<style>
+			*{
+				margin: 0;
+				padding: 0;
+				box-sizing: border-box;
+			}
+			body{
+				font-family: SimSun;
+			}
+			section{
+				display:block;
+				margin: 20px 10px;
+			}
+			.title{
+				text-align: left;
+			}
+			.preface p{
+				line-height: 30px;
+			}
+			.preface p.content{
+				text-indent: 2em;
+			}
+			section > table{
+				table-layout: fixed;
+				width: 100%;
+				margin: 20px 0px;
+				text-align:center;
+				word-wrap:break-word;
+			}
+			section table td{
+				padding:5px 5px;
+			}
+			h5 {
+				font-size: medium;
+    			padding: 10px;
+    			color: blue;
+			}
+			h6 {
+    			font-size: medium;
+    			padding: 10px;
+			}
+			p {
+				padding: 10px;
+			}
+			thead {
+    			background-color: gainsboro;
+    			font-weight: bold;
+			}
+            .name_td {
+            	width:30%;
+            }
+            .font_red {
+				color: red;
+            }
+
+            .name_td_text {
+            	text-align:left;
+            }
+			.description_td {
+				width: 30%;
+			}
+
+			.description_td_text {
+				text-align:left;
+			}
+
+			.demo_pre {
+    			background-color: gainsboro;
+    			padding:10px;
+    			font-size:small;
+			}
+			.span-left-1 {
+    			margin-left: 15px;
+			}
+			.span-left-2 {
+    			margin-left: 30px;
+			}
+		</style>
+	</head>
+	<body>
+		<!-- 标题 start -->
+		<section class="title">
+			<h2>${serviceName} ${serviceId}</h2>
+			<br/>
+			<p style=" font-size: small;">更新时间：${gmtModified}</p>
+		</section>
+
+		<!-- 标题 end -->
+		<section class="count-info">
+			<h3>简介</h3>
+			<br/>
+			<p>${description}</p>
+		</section>
+		<section class="count-info">
+			<h3>请求地址</h3>
+			<table border="1" cellspacing="0" cellpadding="0">
+				<thead>
+				<tr>
+					<td>环境</td>
+					<td>HTTPS</td>
+				</tr>
+				</thead>
+				<tr>
+					<td>测试环境</td>
+					<td class="description_td_text" >https://openapi.guahao-test.com/openapi</td>
+				</tr>
+				<tr>
+					<td>生产地址</td>
+					<td class="description_td_text" >https://openapi.guahao.com/openapi</td>
+				</tr>
+			</table>
+		</section>
+		<section class="count-info">
+			<h3>访问规则</h3>
+			<table border="1" cellspacing="0" cellpadding="0">
+				<thead>
+				<tr>
+					<td>规则</td>
+					<td>描述</td>
+				</tr>
+				</thead>
+				<tr>
+					<td>请求方式</td>
+					<td>${requestMethod}</td>
+				</tr>
+				<tr>
+					<td>请求参数加密</td>
+					<td>${securityConfig.request}</td>
+				</tr>
+				<tr>
+					<td>响应数据解密</td>
+					<td>${securityConfig.response}</td>
+				</tr>
+			</table>
+		</section>
+		<section class="count-info">
+			<h3>公共参数</h3>
+			<h5 >Header</h5>
+			<table border="1" cellspacing="0" cellpadding="0">
+				<thead>
+				<tr>
+					<td>参数名称</td>
+					<td>参数类型</td>
+					<td>是否必填</td>
+					<td style="width: 50%;" >描述</td>
+				</tr>
+				</thead>
+				<tr>
+					<td>appkey</td>
+					<td>String</td>
+					<td>是</td>
+					<td class="description_td_text" >用户秘钥管理中的AccessKey ID，具体参见：<a href="${appkeyUrl}">访问控制</a></td>
+				</tr>
+				<tr>
+					<td>method</td>
+					<td>String</td>
+					<td>是</td>
+					<td class="description_td_text" >平台接口名称，此接口为：<span class="font_red">${serviceId}</span></td>
+				</tr>
+				<tr>
+					<td>timestamp</td>
+					<td>String</td>
+					<td>是</td>
+					<td class="description_td_text" >UNIX时间戳，单位毫秒，需要与平台服务器时间差值在2.5分钟内，如：1605868401000</td>
+				</tr>
+				<tr>
+					<td>version</td>
+					<td>String</td>
+					<td>是</td>
+					<td class="description_td_text" >版本，此接口为：<span class="font_red">2.0</span></td>
+				</tr>
+				<tr>
+					<td>product-code</td>
+					<td>String</td>
+					<td>是</td>
+					<td class="description_td_text" >产品编码，此接口为：<span class="font_red">${productCode}</span></td>
+				</tr>
+				<tr>
+					<td>message-id</td>
+					<td>String</td>
+					<td>是</td>
+					<td class="description_td_text" >由调用方生成，请求唯一标识，长度不超过36位；相同message-id 2.5 分钟内只能被使用一次</td>
+				</tr>
+				<tr>
+					<td>sign</td>
+					<td>String</td>
+					<td>是</td>
+					<td class="description_td_text" >签名，详情见 签名介绍</td>
+				</tr>
+				<tr>
+					<td>content-type</td>
+					<td>String</td>
+					<td>是</td>
+					<td class="description_td_text" >${contentType}</td>
+				</tr>
+				<#if contentType?? && contentType == "application/json">
+				<tr>
+					<td>content-md5</td>
+					<td>String</td>
+					<td>是</td>
+					<td class="description_td_text" >请求体为JSON且报文不为空时，对JSON报文体数据进行md5并转化为32为大写的字符串，用于加签时使用</td>
+				</tr>
+				</#if>
+			</table>
+		</section>
+
+		<section class="count-info">
+			<h3>请求参数</h3>
+			<h5>参数描述</h5>
+			<table border="1" cellspacing="0" cellpadding="0">
+				<thead>
+				<tr>
+					<td class="name_td">参数名称</td>
+					<td>参数类型</td>
+					<td>是否必填</td>
+					<td class="description_td">描述</td>
+				</tr>
+				</thead>
+                <#macro paramTree params leftStr>
+                <#if params?? && params?size gt 0>
+                    <#list params as requestParameter>
+                        <tr>
+                            <td class="name_td_text">${leftStr} ${requestParameter.name!''}
+							</td>
+                            <td>${requestParameter.type!''}</td>
+                            <td><#if requestParameter.required == true>是<#else>否</#if></td>
+                            <td class="description_td_text" >${requestParameter.description!''}</td>
+                        </tr>
+                        <#if requestParameter.children?? && requestParameter.children?size gt 0>
+                            <@paramTree params = requestParameter.children leftStr = leftStr+"-"/>
+                        </#if>
+                    </#list>
+                </#if>
+                </#macro>
+                <@paramTree params = requestParameterList  leftStr = ""/>
+			</table>
+			<h5>请求示例</h5>
+			<pre class="demo_pre">${requestDemo}</pre>
+		</section>
+
+		<section class="count-info">
+			<h3>响应参数</h3>
+			<h5>参数描述</h5>
+			<table border="1" cellspacing="0" cellpadding="0">
+				<thead>
+				<tr>
+					<td class="name_td">参数名称</td>
+					<td>参数类型</td>
+					<td>是否必填</td>
+					<td class="description_td">描述</td>
+				</tr>
+				</thead>
+                <#macro responseParamTree responseParams leftStr>
+                <#if responseParams?? && responseParams?size gt 0>
+                    <#list responseParams as responseParameter>
+                        <tr>
+                            <td class="name_td_text">${leftStr} ${responseParameter.name!''}</td>
+                            <td>${responseParameter.type!''}</td>
+                            <td><#if responseParameter.required == true>是<#else>否</#if></td>
+                            <td class="description_td_text" >${responseParameter.description!''}</td>
+                        </tr>
+                        <#if responseParameter.children?? && responseParameter.children?size gt 0>
+                            <@responseParamTree responseParams = responseParameter.children leftStr = leftStr+"-"/>
+                        </#if>
+                    </#list>
+                </#if>
+                </#macro>
+                <@responseParamTree responseParams = responseParameterList  leftStr = ""/>
+			</table>
+
+			<h5>响应示例</h5>
+				<pre class="demo_pre" >${responseDemo}</pre>
+		</section>
+
+		<section class="count-info">
+			<h3>API工具</h3>
+			<h5><a href="https://kano.guahao.cn/UxP397539649">java-demo代码</a>	<a href="https://kano.guahao.cn/Moi396824752">php-demo代码</a></h5>
+		</section>
+
+		<section class="count-info">
+			<h3>签名介绍</h3>
+			<h5>加签主体</h5>
+			<br/>
+			<p><b>仅请求体加签，响应体不涉及加签。</b></p>
+			<h5>加签步骤</h5>
+			<h6>1 构造原串</h6>
+			<p>1.1 将公共参数（除sign外的非空参数） + HTTP Query 参数（即，URL后面拼接的参数或FORM表单字段）按照字母先后顺序排序得到：keyvaluekeyvalue...keyvalue即得到拼接字符串originalSignStr。</p>
+			<p class="demo_pre" >
+				A. JSON报文数据（若JSON报文为空，则content-md5不参与加签构造）<br/>
+				<span class="span-left-1">a. 首先对JSON请求体数据（JSON整体，若需要加密则为加密后的JSON报文）进行md5并转化为32位大写字符串</span><br/>
+				<span class="span-left-1">b. 放置于请求头content-md5字段的value值中</span><br/>
+				<span class="span-left-1">c. 以content-md5作为键参与键值对排序</span><br/><br/>
+				<span class="span-left-1">如： 请求头为 method="guahao.hospdept.search"，appkey="123456"</span><br/>
+					 <span class="span-left-2">JSON原始报文为 jsonBody={"name":"test","age":25,"department":"门诊"，"hospital":"同济医院"}</span><br/>
+				<span class="span-left-1">首先：将jsonBody进行md5并转化为32位大写字符串获得contentMd5Value：BEC73AAA277077898BCEA487365782FE</span><br/>
+				<span class="span-left-1">其次：将contentMd5Value置于请求头content-md5字段的value值中：content-md5="BEC73AAA277077898BCEA487365782FE"</span><br/>
+					<span class="span-left-2">此时请求头为：method="guahao.hospdept.search"，appkey="123456"，content-md5="BEC73AAA277077898BCEA487365782FE"</span><br/>
+				<span class="span-left-1">最后：以content-md5作为键参与键值对排序拼接，得到字符串源：</span><br/>
+					<span class="span-left-2">originalSignStr = appkey123456content-md5BEC73AAA277077898BCEA487365782FEmethodguahao.hospdept.search</span><br/>
+				B. FORM表单数据<br/>
+				<span class="span-left-1">如：请求头为 method="guahao.hospdept.search"，appkey="123456"</span><br/>
+					<span class="span-left-2">FORM表单数据为 query="同济医院"</span><br/>
+				<span class="span-left-1">拼接得到字符串源为：</span><br/>
+				<span class="span-left-1">originalSignStr = appkey123456methodguahao.hospdept.searchquery同济医院</span>
+			</p>
+			<p>1.2 将appsecret字符串名称和秘钥appsecret值分别连接到拼装好的字符串源originalSignStr头部和尾部，获得待加签字符串targetSignStr（此步骤JSON报文数据和FORM表单数据均相同）</p>
+			<p class="demo_pre" >
+				例如：appsecret="36488SDXSXXXXXXXXXXXXXXXXX"<br/>
+				待加签字符串即为：<br/>
+				A. JSON报文数据：<br/>
+				<span class="span-left-1">targetSignStr = appsecretappkey123456content-md5BEC73AAA277077898BCEA487365782FEmethodguahao.hospdept.search36488SDXSXXXXXXXXXXXXXXXXX</span><br/><br/>
+				B. FORM表单数据：<br/>
+				<span class="span-left-1">targetSignStr = appsecretappkey123456methodguahao.hospdept.searchquery同济医院36488SDXSXXXXXXXXXXXXXXXXXXX</span>
+			</p>
+			<h6>2 生成签名</h6>
+			<p>将待加密字符串targetSignStr进行<b>md5并转化为32位大写</b>，即得到签名signStr</p>
+			<p class="demo_pre" >signStr = md5(targetSignStr).toUpperCase();</p>
+			<h6>3 将signStr的值置于请求头的sign字段中，最终请求信息如下：</h6>
+			<p class="demo_pre" >
+				如：signStr=1D3363C18A543E0247AD8FF83E189C0C<br/>
+				A. JSON报文数据<br/>
+				<span class="span-left-1">请求头：method="guahao.hospdept.search"，appkey="123456"，content-md5="BEC73AAA277077898BCEA487365782FE"，sign="1D3363C18A543E0247AD8FF83E189C0C"</span><br/>
+				<span class="span-left-1">JSON报文：{"name":"test","age":25,"department":"门诊"，"hospital":"同济医院"}</span><br/><br/>
+				B. FORM表单数据<br/>
+				<span class="span-left-1">请求头：method="guahao.hospdept.search"，appkey="123456"，sign="1D3363C18A543E0247AD8FF83E189C0C"</span><br/>
+				<span class="span-left-1">FORM表单数据：query="同济医院"</span>
+			</p>
+		</section>
+		<section class="count-info">
+			<h3>平台异常码</h3>
+			<h5>网关级异常码示例</h5>
+			<table border="1" cellspacing="0" cellpadding="0">
+				<thead>
+				<tr>
+					<td class="name_td">code</td>
+					<td class="description_td">描述</td>
+					<td>备注</td>
+				</tr>
+				</thead>
+				<tr>
+					<td>0</td>
+					<td class="description_td_text" >成功</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>-1</td>
+					<td class="description_td_text" >失败</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>-14</td>
+					<td class="description_td_text" >XXX:具体method:用户签约产品不包含该api</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>202101</td>
+					<td class="description_td_text" >参数[XX]不能为空</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>202116</td>
+					<td class="description_td_text" >JSON报文的content-md5校验失败</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>202117</td>
+					<td class="description_td_text" >时间戳timestamp格式错误</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>202118</td>
+					<td class="description_td_text" >消息标识message-id已失效</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>202119</td>
+					<td class="description_td_text" >消息标识message-id格式错误，长度超过36位</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>202120</td>
+					<td class="description_td_text" >服务路径无效或错误</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>200002</td>
+					<td class="description_td_text" >应用凭证ID[XXX]无效或错误</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>202104</td>
+					<td class="description_td_text" >服务接口名称[XX]无效或错误</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>202106</td>
+					<td class="description_td_text" >签名版本[XXX]无效或不支持</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>202110</td>
+					<td class="description_td_text" >请求体Body数据格式类型,Content-Type[XX]不支持！</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>202112</td>
+					<td class="description_td_text" >请求失效，时间戳已经过期</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>200051</td>
+					<td class="description_td_text" >无效签名</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>200052</td>
+					<td class="description_td_text" >签名算法,digest[XX]不支持</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>400001</td>
+					<td class="description_td_text" >请求源的ip未授权</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>400002</td>
+					<td class="description_td_text" >系统配置错误</td>
+					<td></td>
+				</tr>
+			</table>
+			<h5>开放平台级异常码示例</h5>
+			<table border="1" cellspacing="0" cellpadding="0">
+				<thead>
+				<tr>
+					<td class="name_td">code</td>
+					<td class="description_td">描述</td>
+					<td>备注</td>
+				</tr>
+				</thead>
+				<tr>
+					<td>OPEN_202100_SYS</td>
+					<td class="description_td_text" >method为空</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>OPEN_202101_SYS</td>
+					<td class="description_td_text" >method无效，请开发者注意检查！</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>OPEN_402001_API</td>
+					<td class="description_td_text" >服务API参数名[XX]不能为空！</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>OPEN_402002_API</td>
+					<td class="description_td_text" >服务API参数[XX=XX]数据格式错误！</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>OPEN_402003_API</td>
+					<td class="description_td_text" >参数JSON解析异常！</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>OPEN_403000_API</td>
+					<td class="description_td_text" >服务API配置出错，接口协议[XX]不支持！</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>OPEN_403200_API</td>
+					<td class="description_td_text" >接口URL参数非法！</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>OPEN_404000_ENV</td>
+					<td class="description_td_text" >API运行环境配置失效，请开发者注意检查！</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>OPEN_600000_API</td>
+					<td class="description_td_text" >Return result is empty</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>OPEN_601000_API</td>
+					<td class="description_td_text" >Remote connect timeout</td>
+					<td></td>
+				</tr>
+				<tr>
+					<td>OPEN_602000_API</td>
+					<td class="description_td_text" >Remote http call failed:XXX</td>
+					<td></td>
+				</tr>
+			</table>
+		</section>
+	</body>
+</html>

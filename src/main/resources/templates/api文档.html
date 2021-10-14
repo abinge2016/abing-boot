@@ -1,0 +1,338 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<div class="ant-modal-body">
+    <div class="apis">
+        <div class="title" style="margin-top: 0px;">简介</div>
+        <p>获取所有的标准科室</p>
+        <div class="title">请求地址</div>
+        <div class="ant-table-wrapper">
+            <div class="ant-spin-nested-loading">
+                <div class="ant-spin-container">
+                    <div class="ant-table">
+                        <div class="ant-table-container">
+                            <div class="ant-table-content">
+                                <table style="table-layout: auto;">
+                                    <colgroup></colgroup>
+                                    <thead class="ant-table-thead">
+                                    <tr>
+                                        <th class="ant-table-cell">环境</th>
+                                        <th class="ant-table-cell">HTTPS</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="ant-table-tbody">
+                                    <tr data-row-key="test" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell">测试地址</td>
+                                        <td class="ant-table-cell">https://openapi.guahao-test.com/openapi</td>
+                                    </tr>
+                                    <tr data-row-key="production" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell">生产地址</td>
+                                        <td class="ant-table-cell">https://openapi.guahao.com/openapi</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="title">访问规则</div>
+        <div class="ant-table-wrapper">
+            <div class="ant-spin-nested-loading">
+                <div class="ant-spin-container">
+                    <div class="ant-table">
+                        <div class="ant-table-container">
+                            <div class="ant-table-content">
+                                <table style="table-layout: auto;">
+                                    <colgroup></colgroup>
+                                    <thead class="ant-table-thead">
+                                    <tr>
+                                        <th class="ant-table-cell">规则</th>
+                                        <th class="ant-table-cell">描述</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="ant-table-tbody">
+                                    <tr data-row-key="requestMethod" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell">请求方式</td>
+                                        <td class="ant-table-cell">POST</td>
+                                    </tr>
+                                    <tr data-row-key="request" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell">请求参数加密</td>
+                                        <td class="ant-table-cell">无</td>
+                                    </tr>
+                                    <tr data-row-key="response" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell">响应数据解密</td>
+                                        <td class="ant-table-cell">无</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="title">公共参数<br><span class="secondTitle">Header</span></div>
+        <div class="ant-table-wrapper">
+            <div class="ant-spin-nested-loading">
+                <div class="ant-spin-container">
+                    <div class="ant-table">
+                        <div class="ant-table-container">
+                            <div class="ant-table-content">
+                                <table style="table-layout: auto;">
+                                    <colgroup>
+                                        <col>
+                                        <col>
+                                        <col>
+                                        <col style="width: 600px; min-width: 600px;">
+                                    </colgroup>
+                                    <thead class="ant-table-thead">
+                                    <tr>
+                                        <th class="ant-table-cell">参数名</th>
+                                        <th class="ant-table-cell">参数类型</th>
+                                        <th class="ant-table-cell">是否必须</th>
+                                        <th class="ant-table-cell">描述</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="ant-table-tbody">
+                                    <tr data-row-key="appkey" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell">appkey</td>
+                                        <td class="ant-table-cell">String</td>
+                                        <td class="ant-table-cell">是</td>
+                                        <td class="ant-table-cell">
+                                            <div>用户秘钥管理中的AccessKey ID，具体参加<span style="cursor: pointer;color:#409eff;">访问控制</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-row-key="method" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell">method</td>
+                                        <td class="ant-table-cell">String</td>
+                                        <td class="ant-table-cell">是</td>
+                                        <td class="ant-table-cell">
+                                            <div>平台接口名称，此接口为：<span style="color: #ff563c;">guahao.health.standarddepart.allstddeptlist</span>
+                                            </div>
+                                        </td>
+                                    </tr>
+                                    <tr data-row-key="timestamp" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell">timestamp</td>
+                                        <td class="ant-table-cell">String</td>
+                                        <td class="ant-table-cell">是</td>
+                                        <td class="ant-table-cell">
+                                            <div>UNIX时间戳，单位毫秒，需要与平台服务器时间差值在2.5分钟内，如：1605868401000</div>
+                                        </td>
+                                    </tr>
+                                    <tr data-row-key="version" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell">version</td>
+                                        <td class="ant-table-cell">String</td>
+                                        <td class="ant-table-cell">是</td>
+                                        <td class="ant-table-cell">
+                                            <div>版本，此接口为：<span style="color: #ff563c;">2.0</span></div>
+                                        </td>
+                                    </tr>
+                                    <tr data-row-key="product-code" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell">product-code</td>
+                                        <td class="ant-table-cell">String</td>
+                                        <td class="ant-table-cell">是</td>
+                                        <td class="ant-table-cell">
+                                            <div>产品编码，此接口为：<span style="color: #ff563c;">11739tx98</span></div>
+                                        </td>
+                                    </tr>
+                                    <tr data-row-key="message-id" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell">message-id</td>
+                                        <td class="ant-table-cell">String</td>
+                                        <td class="ant-table-cell">是</td>
+                                        <td class="ant-table-cell">
+                                            <div>由调用方生成，请求唯一标识，长度不超过36位；相同message-id 2.5 分钟内只能被使用一次</div>
+                                        </td>
+                                    </tr>
+                                    <tr data-row-key="sign" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell">sign</td>
+                                        <td class="ant-table-cell">String</td>
+                                        <td class="ant-table-cell">是</td>
+                                        <td class="ant-table-cell">
+                                            <div>签名，详情见<span style="cursor: pointer;color:#409eff;">签名介绍</span></div>
+                                        </td>
+                                    </tr>
+                                    <tr data-row-key="content-type" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell">content-type</td>
+                                        <td class="ant-table-cell">String</td>
+                                        <td class="ant-table-cell">是</td>
+                                        <td class="ant-table-cell">
+                                            <div>application/json</div>
+                                        </td>
+                                    </tr>
+                                    <tr data-row-key="content-md5" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell">content-md5</td>
+                                        <td class="ant-table-cell">String</td>
+                                        <td class="ant-table-cell">是</td>
+                                        <td class="ant-table-cell">
+                                            <div>请求体为JSON且报文不为空时，对JSON报文体数据进行md5并转化为32为大写的字符串，用于加签时使用</div>
+                                        </td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="title">请求参数<br><span class="secondTitle">参数描述</span></div>
+        <div class="ant-table-wrapper">
+            <div class="ant-spin-nested-loading">
+                <div class="ant-spin-container">
+                    <div class="ant-table">
+                        <div class="ant-table-container">
+                            <div class="ant-table-content">
+                                <table style="table-layout: auto;">
+                                    <colgroup></colgroup>
+                                    <thead class="ant-table-thead">
+                                    <tr>
+                                        <th class="ant-table-cell">参数名称</th>
+                                        <th class="ant-table-cell">参数类型</th>
+                                        <th class="ant-table-cell">是否必填</th>
+                                        <th class="ant-table-cell">描述</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="ant-table-tbody">
+                                    <tr data-row-key="param" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell ant-table-cell-with-append"><span
+                                                class="ant-table-row-indent indent-level-0"
+                                                style="padding-left: 0px;"></span>
+                                            <button type="button" aria-label="展开行"
+                                                    class="api-code-expand-icon api-code-expand-icon-collapsed"></button>
+                                            param
+                                        </td>
+                                        <td class="ant-table-cell">object</td>
+                                        <td class="ant-table-cell">否</td>
+                                        <td class="ant-table-cell">请求对象</td>
+                                    </tr>
+                                    <tr data-row-key="weiyi-appid" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell ant-table-cell-with-append"><span
+                                                class="ant-table-row-indent indent-level-0"
+                                                style="padding-left: 0px;"></span><span
+                                                style="display: inline-block; width: 25px;"></span>weiyi-appid
+                                        </td>
+                                        <td class="ant-table-cell">string</td>
+                                        <td class="ant-table-cell">是</td>
+                                        <td class="ant-table-cell">appId</td>
+                                    </tr>
+                                    <tr data-row-key="weiyi-authtoken" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell ant-table-cell-with-append"><span
+                                                class="ant-table-row-indent indent-level-0"
+                                                style="padding-left: 0px;"></span><span
+                                                style="display: inline-block; width: 25px;"></span>weiyi-authtoken
+                                        </td>
+                                        <td class="ant-table-cell">string</td>
+                                        <td class="ant-table-cell">是</td>
+                                        <td class="ant-table-cell">请求参数</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="secondTitle">请求示例</span>
+        <pre class="api-code-pre"><code>curl --request POST 'http://openapi.guahao-test.com/openapi' \
+--header 'Content-Type: application/json' \
+--header 'appkey: 具体的AccessKey ID' \
+--header 'method: guahao.health.standarddepart.allstddeptlist' \
+--header 'sign: 对请求头和请求报文进行加签算法后的签名' \
+--header 'timestamp: 1617169795442' \
+--header 'version: 2.0' \
+--header 'product-code: 11739tx98' \
+--header 'message-id: e6f9b934-e3fb-4b16-ac75-491770b9cfeb' \
+--header 'version: 2.0' \
+--header 'content-md5: 请求体为JSON报文并且JSON报文不为空时，对JSON报文体数据进行md5并转化为32为大写的字符串，用于加签时使用' \
+--data-raw '{
+	"param":{
+		"consultShieldingType":null,
+		"sourceType":null,
+		"noLimited":null,
+		"consultLegalDept":null
+	},
+	"weiyi-appid":null,
+	"weiyi-authtoken":null
+}'</code></pre>
+        <div class="title">响应参数<br><span class="secondTitle">参数描述</span></div>
+        <div class="ant-table-wrapper">
+            <div class="ant-spin-nested-loading">
+                <div class="ant-spin-container">
+                    <div class="ant-table">
+                        <div class="ant-table-container">
+                            <div class="ant-table-content">
+                                <table style="table-layout: auto;">
+                                    <colgroup></colgroup>
+                                    <thead class="ant-table-thead">
+                                    <tr>
+                                        <th class="ant-table-cell">参数名称</th>
+                                        <th class="ant-table-cell">参数类型</th>
+                                        <th class="ant-table-cell">是否必填</th>
+                                        <th class="ant-table-cell">描述</th>
+                                    </tr>
+                                    </thead>
+                                    <tbody class="ant-table-tbody">
+                                    <tr data-row-key="code" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell ant-table-cell-with-append"><span
+                                                class="ant-table-row-indent indent-level-0"
+                                                style="padding-left: 0px;"></span><span
+                                                style="display: inline-block; width: 25px;"></span>code
+                                        </td>
+                                        <td class="ant-table-cell">int</td>
+                                        <td class="ant-table-cell">是</td>
+                                        <td class="ant-table-cell">响应码，0-成功，非0-失败</td>
+                                    </tr>
+                                    <tr data-row-key="data" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell ant-table-cell-with-append"><span
+                                                class="ant-table-row-indent indent-level-0"
+                                                style="padding-left: 0px;"></span>
+                                            <button type="button" aria-label="展开行"
+                                                    class="api-code-expand-icon api-code-expand-icon-collapsed"></button>
+                                            data
+                                        </td>
+                                        <td class="ant-table-cell">object</td>
+                                        <td class="ant-table-cell">否</td>
+                                        <td class="ant-table-cell">响应业务数据</td>
+                                    </tr>
+                                    <tr data-row-key="message" class="ant-table-row ant-table-row-level-0">
+                                        <td class="ant-table-cell ant-table-cell-with-append"><span
+                                                class="ant-table-row-indent indent-level-0"
+                                                style="padding-left: 0px;"></span><span
+                                                style="display: inline-block; width: 25px;"></span>message
+                                        </td>
+                                        <td class="ant-table-cell">string</td>
+                                        <td class="ant-table-cell">否</td>
+                                        <td class="ant-table-cell">响应信息</td>
+                                    </tr>
+                                    </tbody>
+                                </table>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <span class="secondTitle">响应示例</span>
+        <pre class="api-code-pre"><code>{
+	"code":"0",
+	"data":{
+		"flag":null,
+		"sort":null,
+		"message":null,
+		"stdDeptList":null,
+		"authentication":null
+	},
+	"message":null
+}</code></pre>
+    </div>
+</div>
+</body>
+</html>

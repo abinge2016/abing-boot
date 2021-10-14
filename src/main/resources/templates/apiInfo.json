@@ -1,0 +1,315 @@
+{
+  "code": "0",
+  "data": {
+    "apiCodeDownloadUrl": {
+      "java": "https:\/\/kano.guahao-test.com\/XkW41469614",
+      "php": "https:\/\/kano.guahao-test.com\/8oM41468106"
+    },
+    "appkeyUrl": "http://console-cloud.guahao.cn/user-manage",
+    "contentType": "application\/json",
+    "description": "[\u5E73\u53F0\u5386\u53F2\u6570\u636E\u8FC1\u79FB]",
+    "gmtModified": "2021-02-23 18:32:34",
+    "isAuth": false,
+    "productCode": "1V1HYV30f",
+    "requestDemo": "curl --request POST 'http:\/\/openapi.guahao-test.com\/openapi' \\\r\n--header 'Content-Type: application\/json' \\\r\n--header 'appkey: \u5177\u4F53\u7684AccessKey ID' \\\r\n--header 'method: guahao.face.facematch' \\\r\n--header 'sign: \u5BF9\u8BF7\u6C42\u5934\u548C\u8BF7\u6C42\u62A5\u6587\u8FDB\u884C\u52A0\u7B7E\u7B97\u6CD5\u540E\u7684\u7B7E\u540D' \\\r\n--header 'timestamp: 1617246004732' \\\r\n--header 'version: 2.0' \\\r\n--header 'product-code: 1V1HYV30f' \\\r\n--header 'message-id: f526b131-875e-46c8-9df9-e726ac13c60f' \\\r\n--header 'version: 2.0' \\\r\n--header 'content-md5: \u8BF7\u6C42\u4F53\u4E3AJSON\u62A5\u6587\u5E76\u4E14JSON\u62A5\u6587\u4E0D\u4E3A\u7A7A\u65F6\uFF0C\u5BF9JSON\u62A5\u6587\u4F53\u6570\u636E\u8FDB\u884Cmd5\u5E76\u8F6C\u5316\u4E3A32\u4E3A\u5927\u5199\u7684\u5B57\u7B26\u4E32\uFF0C\u7528\u4E8E\u52A0\u7B7E\u65F6\u4F7F\u7528' \\\r\n--data-raw '{\n\t\"faceMatchRequestDTO\":{\n\t\t\"appVersion\":null,\n\t\t\"business\":null,\n\t\t\"appId\":null,\n\t\t\"appKey\":null,\n\t\t\"imageList\":null\n\t}\n}'",
+    "requestMethod": "POST",
+    "requestParameterList": [
+      {
+        "children": [
+          {
+            "children": [],
+            "code": "",
+            "defaultValue": "",
+            "description": "\u5E94\u7528\u7248\u672C",
+            "example": "",
+            "name": "appVersion",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "children": [],
+            "code": "",
+            "defaultValue": "",
+            "description": "\u4E1A\u52A1",
+            "example": "",
+            "name": "business",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "children": [],
+            "code": "",
+            "defaultValue": "",
+            "description": "\u5E94\u7528ID",
+            "example": "",
+            "name": "appId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "children": [],
+            "code": "",
+            "defaultValue": "",
+            "description": "\u5E94\u7528\u8D26\u53F7",
+            "example": "",
+            "name": "appKey",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "children": [],
+            "code": "",
+            "defaultValue": "",
+            "description": "\u56FE\u7247\u5217\u8868",
+            "example": "",
+            "name": "imageList",
+            "required": false,
+            "type": "array"
+          }
+        ],
+        "code": "",
+        "defaultValue": "",
+        "description": "",
+        "example": "",
+        "name": "faceMatchRequestDTO",
+        "required": false,
+        "type": "object"
+      },
+      {
+        "children": [
+          {
+            "children": [
+              {
+                "children": [
+                  {
+                    "children": [],
+                    "code": "",
+                    "defaultValue": "",
+                    "description": "\u5E94\u7528\u7248\u672C",
+                    "example": "",
+                    "name": "appVersion",
+                    "required": false,
+                    "type": "string"
+                  },
+                  {
+                    "children": [],
+                    "code": "",
+                    "defaultValue": "",
+                    "description": "\u4E1A\u52A1",
+                    "example": "",
+                    "name": "business",
+                    "required": false,
+                    "type": "string"
+                  },
+                  {
+                    "children": [],
+                    "code": "",
+                    "defaultValue": "",
+                    "description": "\u5E94\u7528ID",
+                    "example": "",
+                    "name": "appId",
+                    "required": false,
+                    "type": "string"
+                  },
+                  {
+                    "children": [],
+                    "code": "",
+                    "defaultValue": "",
+                    "description": "\u5E94\u7528\u8D26\u53F7",
+                    "example": "",
+                    "name": "appKey",
+                    "required": false,
+                    "type": "string"
+                  },
+                  {
+                    "children": [],
+                    "code": "",
+                    "defaultValue": "",
+                    "description": "\u56FE\u7247\u5217\u8868",
+                    "example": "",
+                    "name": "imageList",
+                    "required": false,
+                    "type": "array"
+                  }
+                ],
+                "code": "",
+                "defaultValue": "",
+                "description": "",
+                "example": "",
+                "name": "faceMatchRequestDTO2",
+                "required": false,
+                "type": "object"
+              }
+            ],
+            "code": "",
+            "defaultValue": "",
+            "description": "\u5E94\u7528\u7248\u672C",
+            "example": "",
+            "name": "appVersion",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "children": [],
+            "code": "",
+            "defaultValue": "",
+            "description": "\u4E1A\u52A1",
+            "example": "",
+            "name": "business",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "children": [],
+            "code": "",
+            "defaultValue": "",
+            "description": "\u5E94\u7528ID",
+            "example": "",
+            "name": "appId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "children": [],
+            "code": "",
+            "defaultValue": "",
+            "description": "\u5E94\u7528\u8D26\u53F7",
+            "example": "",
+            "name": "appKey",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "children": [],
+            "code": "",
+            "defaultValue": "",
+            "description": "\u56FE\u7247\u5217\u8868",
+            "example": "",
+            "name": "imageList",
+            "required": false,
+            "type": "array"
+          }
+        ],
+        "code": "",
+        "defaultValue": "",
+        "description": "",
+        "example": "",
+        "name": "faceMatchRequestDTO2",
+        "required": false,
+        "type": "object"
+      }
+    ],
+    "responseDemo": "{\n\t\"code\":\"0\",\n\t\"data\":{\n\t\t\"score\":null,\n\t\t\"redirectUrl\":null,\n\t\t\"livenessTicket\":null,\n\t\t\"livenessKanoId\":null,\n\t\t\"authResult\":null,\n\t\t\"faceList\":null,\n\t\t\"faceKanoId\":null\n\t},\n\t\"message\":null\n}",
+    "responseParameterList": [
+      {
+        "children": [],
+        "code": "",
+        "defaultValue": "",
+        "description": "\u54CD\u5E94\u7801",
+        "example": "",
+        "name": "code",
+        "required": true,
+        "type": "string"
+      },
+      {
+        "children": [
+          {
+            "children": [],
+            "code": "",
+            "defaultValue": "",
+            "description": "\u5BF9\u6BD4\u76F8\u4F3C\u5EA6",
+            "example": "",
+            "name": "score",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "children": [],
+            "code": "",
+            "defaultValue": "",
+            "description": "\u4E1A\u52A1\u65B9\u56DE\u8C03\u5730\u5740",
+            "example": "",
+            "name": "redirectUrl",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "children": [],
+            "code": "",
+            "defaultValue": "",
+            "description": "\u4EBA\u8138\u6BD4\u5BF9\u7968\u636E\uFF0C\u503C\u4E0EidentityTicket\u503C\u76F8\u540C  \uFF0C\u6709\u6548\u671F1\u5C0F\u65F6",
+            "example": "",
+            "name": "livenessTicket",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "children": [],
+            "code": "",
+            "defaultValue": "",
+            "description": "\u6D3B\u4F53\u56FE\u7247",
+            "example": "",
+            "name": "livenessKanoId",
+            "required": false,
+            "type": "string"
+          },
+          {
+            "children": [],
+            "code": "",
+            "defaultValue": "",
+            "description": "\u8BA4\u8BC1\u7ED3\u679C\uFF0C\u6210\u529F\uFF1A0\uFF0C\u5931\u8D25\uFF1A1\uFF0C\u8BA4\u8BC1\u6807\u51C6\u662F\u5927\u4E8E\u7B49\u4E8E\u5206\u6570\u9600\u503C\u8BA4\u8BC1\u6210\u529F\uFF0C\u5C0F\u4E8E\u5206\u6570\u9600\u503C\u8BA4\u771F\u5931\u8D25",
+            "example": "",
+            "name": "authResult",
+            "required": false,
+            "type": "int"
+          },
+          {
+            "children": [],
+            "code": "",
+            "defaultValue": "",
+            "description": "\u4EBA\u8138\u6BD4\u5BF9\u7ED3\u679C",
+            "example": "",
+            "name": "faceList",
+            "required": false,
+            "type": "array"
+          },
+          {
+            "children": [],
+            "code": "",
+            "defaultValue": "",
+            "description": " \u9759\u6001\u56FE\u7247\u5305\u62EC\u8EAB\u4EFD\u8BC1\u56FE\u7247\uFF0C\u62CD\u7167\u5934\u50CF",
+            "example": "",
+            "name": "faceKanoId",
+            "required": false,
+            "type": "string"
+          }
+        ],
+        "code": "",
+        "defaultValue": "",
+        "description": "\u54CD\u5E94\u6570\u636E",
+        "example": "",
+        "name": "data",
+        "required": true,
+        "type": "object"
+      },
+      {
+        "children": [],
+        "code": "",
+        "defaultValue": "",
+        "description": "\u54CD\u5E94\u4FE1\u606F",
+        "example": "",
+        "name": "message",
+        "required": true,
+        "type": "string"
+      }
+    ],
+    "securityConfig": {
+      "remark": "",
+      "request": "\u65E0",
+      "response": "\u65E0"
+    },
+    "serviceId": "guahao.face.facematch",
+    "serviceName": "\u4EBA\u8138\u5BF9\u6BD4\u63A5\u53E3"
+  },
+  "message": "\u6210\u529F!"
+}

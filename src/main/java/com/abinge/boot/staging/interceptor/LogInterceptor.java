@@ -1,5 +1,6 @@
 package com.abinge.boot.staging.interceptor;
 
+import com.abinge.boot.staging.utils.NetworkUtil;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.stereotype.Component;
 import org.springframework.web.servlet.HandlerInterceptor;
@@ -25,7 +26,7 @@ public class LogInterceptor implements HandlerInterceptor {
         String requestURL = httpServletRequest.getRequestURI();
         String method = httpServletRequest.getMethod();
         //原始请求地址
-        String ip = httpServletRequest.getLocalAddr();
+        String ip = NetworkUtil.getIpAddress(httpServletRequest);
         //请求参数
         String params = httpServletRequest.getQueryString();
         log.info("IP：{}，method：{}，url：{}?{}", ip, method, requestURL, params);

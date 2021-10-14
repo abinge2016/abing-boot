@@ -3,6 +3,7 @@ package com.abinge.boot.staging.model;
 import lombok.Data;
 
 import javax.persistence.Entity;
+import java.util.List;
 
 /**
  * @author abinge
@@ -21,5 +22,8 @@ public class Student extends BaseModel {
     private int grade;
     private short sex;
     private String className;
+
+    private List<String> friends;
+//    private List<Student> studentList;
 
 }
