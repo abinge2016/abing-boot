@@ -1,12 +1,11 @@
 package com.abinge.boot.staging.service;
 
-import com.abinge.boot.staging.dao.StudentRepository;
 import com.abinge.boot.staging.model.Student;
+import com.abinge.boot.staging.repository.StudentRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
  * @author abinge
@@ -23,30 +22,29 @@ public class StudentService {
     @Autowired
     private StudentRepository studentRepository;
 
-    public Student add(Student student) {
+    public Mono<Student> add(Student student) {
         return studentRepository.save(student);
     }
 
-    public Student update(Student student) {
-        return studentRepository.saveAndFlush(student);
+    public Mono<Student> update(Student student) {
+        return studentRepository.save(student);
     }
 
-    public Student delete(Student student) {
+    public Mono<Student> delete(Student student) {
         studentRepository.delete(student);
-        return student;
+        return Mono.just(student);
     }
 
-    public Student queryById(Long id) {
-        return studentRepository.getOne(id);
+    public Mono<Student> queryById(Long id) {
+        return studentRepository.findById(id);
     }
 
-    public List<Student> queryAll() {
+    public Flux<Student> queryAll() {
         return studentRepository.findAll();
     }
 
-    public List<Student> queryAll(Student student) {
-        Example<Student> example = Example.of(student);
-        return studentRepository.findAll(example);
+    public Flux<Student> queryAll(Student student) {
+        return studentRepository.findAll();
     }
 
 }

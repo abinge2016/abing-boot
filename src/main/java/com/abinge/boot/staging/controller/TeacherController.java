@@ -4,10 +4,10 @@ import com.abinge.boot.staging.model.Result;
 import com.abinge.boot.staging.model.Teacher;
 import com.abinge.boot.staging.service.TeacherService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Mono;
+
+import javax.validation.Valid;
 
 /**
  * @author abinge
@@ -25,32 +25,32 @@ public class TeacherController {
     private TeacherService teacherService;
 
     @PostMapping("/add")
-    public Result add(Teacher teacher) {
-        return Result.success(teacherService.add(teacher));
+    public Mono<Result> add(@RequestBody @Valid Teacher teacher) {
+        return teacherService.add(teacher).flatMap(tea -> Mono.just(Result.success(tea)));
     }
 
     @PostMapping("/update")
-    public Result update(Teacher teacher) {
-        return Result.success(teacherService.update(teacher));
+    public Mono<Result> update(@RequestBody @Valid Teacher teacher) {
+        return teacherService.update(teacher).flatMap(tea -> Mono.just(Result.success(tea)));
     }
 
     @PostMapping("/delete")
-    public Result delete(Teacher teacher) {
-        return Result.success(teacherService.delete(teacher));
+    public Mono<Result> delete(@RequestBody Teacher teacher) {
+        return teacherService.delete(teacher).flatMap(tea -> Mono.just(Result.success(tea)));
     }
 
     @PostMapping("/queryById")
-    public Result queryById(Long id) {
-        return Result.success(teacherService.queryById(id));
+    public Mono<Result> queryById(Long id) {
+        return teacherService.queryById(id).flatMap(tea -> Mono.just(Result.success(tea)));
     }
 
     @GetMapping("/queryAll")
-    public Result queryAll() {
-        return Result.success(teacherService.queryAll());
+    public Mono<Result> queryAll() {
+        return teacherService.queryAll().collectList().flatMap(teaList -> Mono.just(Result.success(teaList)));
     }
 
     @PostMapping("/queryAll")
-    public Result queryAll(Teacher teacher) {
-        return Result.success(teacherService.queryAll(teacher));
+    public Mono<Result> queryAll(@RequestBody Teacher teacher) {
+        return teacherService.queryAll(teacher).collectList().flatMap(teaList -> Mono.just(Result.success(teaList)));
     }
 }

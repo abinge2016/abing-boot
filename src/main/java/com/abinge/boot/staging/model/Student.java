@@ -2,7 +2,7 @@ package com.abinge.boot.staging.model;
 
 import lombok.Data;
 
-import javax.persistence.Entity;
+import javax.validation.constraints.NotBlank;
 
 /**
  * @author abinge
@@ -13,10 +13,12 @@ import javax.persistence.Entity;
  * @description TODO
  * @date 2019/1/5 15:56
  */
-@Entity
+
 @Data
 public class Student extends BaseModel {
+    @NotBlank
     private String name;
+    @NotBlank
     private String age;
     private int grade;
     private short sex;

@@ -1,10 +1,16 @@
 package com.abinge.boot.staging.controller;
 
+import com.abinge.boot.staging.aspect.Loggable;
 import com.abinge.boot.staging.model.Result;
 import com.abinge.boot.staging.model.Student;
 import com.abinge.boot.staging.service.StudentService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
+
+import javax.validation.Valid;
+
 
 /**
  * @author abinge
@@ -22,32 +28,44 @@ public class StudentController {
     private StudentService studentService;
 
     @PostMapping("/add")
-    public Result add(@RequestBody Student student) {
-        return Result.success(studentService.add(student));
+    @Loggable
+    public Mono<Result> add(@Valid @RequestBody Student student) {
+        return studentService.add(student).flatMap(stu -> Mono.just(Result.success(stu)));
     }
 
     @PostMapping("/update")
-    public Result update(Student student) {
-        return Result.success(studentService.update(student));
+    @Loggable
+    public Mono<Result> update(@RequestBody @Valid Student student) {
+        return studentService.update(student).flatMap(stu -> Mono.just(Result.success(stu)));
     }
 
     @PostMapping("/delete")
-    public Result delete(Student student) {
-        return Result.success(studentService.delete(student));
+    @Loggable
+    public Mono<Result> delete(@RequestBody Student student) {
+        return studentService.delete(student).flatMap(stu -> Mono.just(Result.success(stu)));
     }
 
     @PostMapping("/queryById")
-    public Result queryById(Long id) {
-        return Result.success(studentService.queryById(id));
+    @Loggable
+    public Mono<Result> queryById(Long id) {
+        return studentService.queryById(id).flatMap(stu -> Mono.just(Result.success(stu)));
     }
 
-    @GetMapping("/queryAll")
-    public Result queryAll() {
-        return Result.success(studentService.queryAll());
+    @GetMapping(value = "/queryAll")
+    @Loggable
+    public Mono<Result> queryAll() {
+        long start = System.currentTimeMillis();
+        Flux<Student> result = studentService.queryAll();
+        System.out.printf("queryAll : " + (System.currentTimeMillis() - start));
+        return result.collectList().flatMap(students -> Mono.just(Result.success(students)));
     }
 
-    @PostMapping("/queryAll")
-    public Result queryAll(Student student) {
-        return Result.success(studentService.queryAll(student));
+    @PostMapping(value = "/queryAll")
+    @Loggable
+    public Mono<Result> queryAll(@RequestBody Student student) {
+        long start = System.currentTimeMillis();
+        Flux<Student> result = studentService.queryAll(student);
+        System.out.printf("queryAll : " + (System.currentTimeMillis() - start));
+        return result.collectList().flatMap(students -> Mono.just(Result.success(students)));
     }
 }

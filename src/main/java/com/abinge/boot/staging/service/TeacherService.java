@@ -1,12 +1,11 @@
 package com.abinge.boot.staging.service;
 
-import com.abinge.boot.staging.dao.TeacherRepository;
 import com.abinge.boot.staging.model.Teacher;
+import com.abinge.boot.staging.repository.TeacherRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
+import reactor.core.publisher.Flux;
+import reactor.core.publisher.Mono;
 
 /**
  * @author abinge
@@ -22,29 +21,28 @@ public class TeacherService {
     @Autowired
     private TeacherRepository teacherRepository;
 
-    public Teacher add(Teacher teacher) {
+    public Mono<Teacher> add(Teacher teacher) {
         return teacherRepository.save(teacher);
     }
 
-    public Teacher update(Teacher teacher) {
-        return teacherRepository.saveAndFlush(teacher);
+    public Mono<Teacher> update(Teacher teacher) {
+        return teacherRepository.save(teacher);
     }
 
-    public Teacher delete(Teacher teacher) {
+    public Mono<Teacher> delete(Teacher teacher) {
         teacherRepository.delete(teacher);
-        return teacher;
+        return Mono.just(teacher);
     }
 
-    public Teacher queryById(Long id) {
-        return teacherRepository.getOne(id);
+    public Mono<Teacher> queryById(Long id) {
+        return teacherRepository.findById(id);
     }
 
-    public List<Teacher> queryAll() {
+    public Flux<Teacher> queryAll() {
         return teacherRepository.findAll();
     }
 
-    public List<Teacher> queryAll(Teacher teacher) {
-        Example<Teacher> example = Example.of(teacher);
-        return teacherRepository.findAll(example);
+    public Flux<Teacher> queryAll(Teacher teacher) {
+        return teacherRepository.findAll();
     }
 }
