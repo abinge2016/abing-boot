@@ -12,6 +12,15 @@ import java.util.Map;
 
 public class MockLoginUtil {
 
+    // f+2wR2qaUHchCSAXxhD9WA==
+    private static final String LOGIN_ID = "chenbj";
+    private static final String LOGIN_PWD = "HXcbj0524@";
+    private static final String USER_ACCOUNT_ID = "1781464937561071616";
+
+    public static void main(String[] args) throws Exception {
+        String s = encryptPwd(LOGIN_PWD);
+        System.out.println(s);
+    }
 
 
     public static void mockLogin(String url, String loginId, String password, CookieStore httpCookieStore) throws Exception {
