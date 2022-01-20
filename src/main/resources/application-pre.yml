@@ -1,0 +1,41 @@
+spring:
+  cloud:
+    gateway:
+      routes:
+        - id: api_osp_router
+          uri: http://10.254.82.132:8080
+          predicates:
+            - Path=/api/osp/**,/openapi/osp/**  # 路径路由前缀匹配/api或/openapi
+          filters:
+            - RewritePath=(/api|/openapi)+(?<segment>/?.*), $\{segment} # 转发时重写路径，剔除url前缀/api或/openapi
+        - id: api_gops_router
+          uri: http://10.254.113.18:8080
+          predicates:
+            - Path=/api/gops/**,/openapi/gops/**
+          filters:
+            - RewritePath=(/api|/openapi)+(?<segment>/?.*), $\{segment}
+
+        # 多节点Weight权重负载
+        - id: api_portal_router1
+          uri: http://10.254.209.135:8080
+          predicates:
+            - Path=/api/portal/**,/openapi/portal/**
+            - Weight=portal_group,7
+          filters:
+            - RewritePath=(/api|/openapi)+(?<segment>/?.*), $\{segment}
+            - LogTime=true
+        - id: api_portal_router2
+          uri: http://10.254.6.255:8080
+          predicates:
+            - Path=/api/portal/**,/openapi/portal/**
+            - Weight=portal_group,3
+          filters:
+            - RewritePath=(/api|/openapi)+(?<segment>/?.*), $\{segment}
+            - LogTime=true
+
+        - id: api_commerce_router
+          uri: http://10.254.50.181:8080
+          predicates:
+            - Path=/api/commerce/**,/openapi/commerce/**
+          filters:
+            - RewritePath=(/api|/openapi)+(?<segment>/?.*), $\{segment}
