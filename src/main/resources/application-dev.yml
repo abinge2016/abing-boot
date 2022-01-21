@@ -2,6 +2,13 @@ spring:
   cloud:
     gateway:
       routes:
+        - id: api_test_router
+          uri: http://localhost:8080
+          predicates:
+            - Path=/api/test/**,/openapi/test/**
+          filters:
+            - RewritePath=(/api|/openapi)+(?<segment>/?.*), $\{segment}
+
         - id: api_osp_router
           uri: http://10.254.82.132:8080
           predicates:
@@ -23,7 +30,6 @@ spring:
             - Weight=portal_group,7
           filters:
             - RewritePath=(/api|/openapi)+(?<segment>/?.*), $\{segment}
-            - LogTime=true
         - id: api_portal_router2
           uri: http://10.254.6.255:8080
           predicates:
@@ -31,7 +37,6 @@ spring:
             - Weight=portal_group,3
           filters:
             - RewritePath=(/api|/openapi)+(?<segment>/?.*), $\{segment}
-            - LogTime=true
 
         - id: api_commerce_router
           uri: http://10.254.50.181:8080
