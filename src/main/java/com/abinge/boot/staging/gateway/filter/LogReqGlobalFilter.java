@@ -8,7 +8,6 @@ import org.springframework.cloud.gateway.filter.factory.rewrite.CachedBodyOutput
 import org.springframework.cloud.gateway.support.BodyInserterContext;
 import org.springframework.core.Ordered;
 import org.springframework.core.io.buffer.DataBuffer;
-import org.springframework.core.io.buffer.DataBufferUtils;
 import org.springframework.http.HttpCookie;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.MediaType;
@@ -25,12 +24,9 @@ import org.springframework.web.server.ServerWebExchange;
 import reactor.core.publisher.Flux;
 import reactor.core.publisher.Mono;
 
-import java.time.Instant;
 import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
-import java.util.Objects;
-import java.util.function.Function;
 import java.util.stream.Collectors;
 
 /**
@@ -41,39 +37,44 @@ import java.util.stream.Collectors;
 @Slf4j
 @Component
 public class LogReqGlobalFilter implements GlobalFilter, Ordered {
-    private static final List<HttpMessageReader<?>> messageReaders = HandlerStrategies.withDefaults().messageReaders();;
+    private static final List<HttpMessageReader<?>> messageReaders = HandlerStrategies.withDefaults().messageReaders();
+    ;
 
     @Override
     public Mono<Void> filter(ServerWebExchange exchange, GatewayFilterChain chain) {
         ServerRequest serverRequest = ServerRequest.create(exchange, messageReaders);
         ServerHttpRequest request = exchange.getRequest();
+
         MultiValueMap<String, String> queryParams = request.getQueryParams();
         HttpHeaders requestHeaders = request.getHeaders();
         MultiValueMap<String, HttpCookie> cookies = request.getCookies();
         log.info("queryParams:{}", JSON.toJSONString(queryParams));
-        log.info("requestHeaders:{}",JSON.toJSONString(requestHeaders));
+        log.info("requestHeaders:{}", JSON.toJSONString(requestHeaders));
         log.info("cookies:{}", JSON.toJSONString(cookies));
+
+        //解析body体信息（包含json体和form体数据）
         MediaType contentType = requestHeaders.getContentType();
         Mono<String> modifiedBody = serverRequest.bodyToMono(String.class)
                 .flatMap(originalBody -> {
                     log.info("originalBody:{}", originalBody);
-                    if (MediaType.APPLICATION_FORM_URLENCODED.isCompatibleWith(contentType)){
+                    if (MediaType.APPLICATION_FORM_URLENCODED.isCompatibleWith(contentType)) {
                         Map<String, Object> originalBodyMap = decodeFormBody(originalBody);
                         // TODO 验签
                         return Mono.just(encodeFormBody(originalBodyMap));
-                    }else if (MediaType.APPLICATION_JSON.isCompatibleWith(contentType)){
+                    } else if (MediaType.APPLICATION_JSON.isCompatibleWith(contentType)) {
                         // TODO 验签
                     }
                     return Mono.just(originalBody);
                 })
                 .switchIfEmpty(Mono.empty());
+
         BodyInserter bodyInserter = BodyInserters.fromPublisher(modifiedBody, String.class);
         HttpHeaders headers = new HttpHeaders();
         headers.putAll(exchange.getRequest().getHeaders());
         headers.remove(HttpHeaders.CONTENT_LENGTH);
 
         CachedBodyOutputMessage outputMessage = new CachedBodyOutputMessage(exchange, headers);
-        return bodyInserter.insert(outputMessage, new BodyInserterContext())
+        return bodyInserter.insert(new CachedBodyOutputMessage(exchange, headers), new BodyInserterContext())
                 .then(Mono.defer(() -> {
                     ServerHttpRequest decorator = decorate(exchange, headers, outputMessage);
                     return chain.filter(exchange.mutate().request(decorator).build());
@@ -100,10 +101,7 @@ public class LogReqGlobalFilter implements GlobalFilter, Ordered {
                 httpHeaders.putAll(headers);
                 if (contentLength > 0) {
                     httpHeaders.setContentLength(contentLength);
-                }
-                else {
-                    // TODO: this causes a 'HTTP/1.1 411 Length Required' // on
-                    // httpbin.org
+                } else {
                     httpHeaders.set(HttpHeaders.TRANSFER_ENCODING, "chunked");
                 }
                 return httpHeaders;
